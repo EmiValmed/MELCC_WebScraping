@@ -1,10 +1,10 @@
 # Web Scraping MELCC
 This repository contains a Python-code used to download daily streamflow historical series from the [MELCC](https://www.cehq.gouv.qc.ca/hydrometrie/historique_donnees/default.asp) (Ministère de l'Environnement et de la Lutte contre les changements climatiques), Quebec.
 
-* **Input**  : a .txt files with the code of the stations (see the *StationQuebec.txt* file).
+* **Input**  : a .txt file with the code of the stations (see the *StationQuebec.txt* file).
 * **Outputs**: 
-    * a .csv file with the streamflow historical serie (one file per catchment).
-    * a .mat file with the streamflow historical serie (one file per catchment).
+    * a .csv file with the streamflow historical series (one file per catchment).
+    * a .mat file with the streamflow historical series (one file per catchment).
     * a .mat file with catchments' surface (area of all catchments specified in the input document). 
 
 ## Contact
