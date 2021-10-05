@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+######################################################################################################################################################
 """
 Created on Wed Aug 21 14:58:07 2019
 @author: Emi_Valmed
@@ -9,8 +10,9 @@ Modifications :
     -Solve the problem "Error tokenizing data" (line 63): stations without measurements at the beginning of the series.
 
 """
-
-# MODULES
+######################################################################################################################################################
+# LIBRERIES
+######################################################################################################################################################
 import os
 import sys
 import requests
@@ -20,10 +22,13 @@ import scipy.io as sio
 from bs4 import BeautifulSoup
 from tkinter import filedialog
 from datetime import datetime, date
+######################################################################################################################################################
 
+######################################################################################################################################################
 
-
+#-----------------------------------------------------------------------------------------------------------------------------------------------------
 # Open file with catchment code 
+#-----------------------------------------------------------------------------------------------------------------------------------------------------
 root    = tk.Tk()
 entrada = filedialog.askopenfile(mode='r')
 root.destroy()
@@ -33,8 +38,9 @@ if (entrada == None):
 pathname = os.path.dirname(entrada.name)                                       # Define the working path equal to that of the input file
 os.chdir(pathname)                                                             # Change your work path.
 
-
+#-----------------------------------------------------------------------------------------------------------------------------------------------------
 # Pick all ids from the stations and put them in a list
+#-----------------------------------------------------------------------------------------------------------------------------------------------------
 Content = entrada.read().split("\n")                                           
 content_lineStation = [String.strip()  for String in Content]
 #content_lineStation.remove('')                                                                        
@@ -42,6 +48,10 @@ print(content_lineStation, "\n")
 
 SurfaceBV = []
 destination_folder_path = './'
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------
+# Web scraping MDDELCC data
+#-----------------------------------------------------------------------------------------------------------------------------------------------------
 for station in content_lineStation:
     urls = ['https://www.cehq.gouv.qc.ca/depot/historique_donnees/fichier/'+ station + '_Q.txt']
     text = station+ '_Q'
@@ -78,12 +88,11 @@ for station in content_lineStation:
                 Data = Data[['Date','Q']]                                        
                 sio.savemat(os.path.join(destination_folder_path,str(station) + '_Q'), {name: col.values for name, col in Data.items()})
                 print('Done! Your file was saved with success')
-               
+                           
                 
-                
-    # Removing the .txt and .csv files
+    # Removing the .txt file #and .csv files
     os.remove(str(station) + '_Q.txt')
-    os.remove(str(station) + '_Q.csv')
+    #os.remove(str(station) + '_Q.csv')
 
 # Exporting surfaces
 Surfaces = pd.DataFrame(list(zip(content_lineStation,SurfaceBV)), columns = ['Station','Surface'])                
@@ -91,20 +100,4 @@ sio.savemat(os.path.join(destination_folder_path,'SurfaceBVs'), {name: col.value
 
 
 sio.savemat(os.path.join(destination_folder_path,'SurfaceBVs'), Surfaces) 
-
-
-
-
-
-
-
-                     
-
-
-            
-
-
-
-
-
-
+                             
